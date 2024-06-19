@@ -181,7 +181,7 @@ oc new-project httpd-project
 3. Deploy the HTTPD Application:
    
   3.1. Create a template file named custom-httpd.yaml:
-  apiVersion: v1
+apiVersion: v1
 kind: Template
 metadata:
   name: custom-httpd
@@ -216,6 +216,7 @@ objects:
     - protocol: TCP
       port: 80
       targetPort: 80
+
 
   3.2. Process and create resources from the template:
   oc process -f custom-httpd.yaml | oc apply -f -
