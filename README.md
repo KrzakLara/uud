@@ -181,41 +181,10 @@ oc new-project httpd-project
 3. Deploy the HTTPD Application:
    
   3.1. Create a template file named custom-httpd.yaml:
-apiVersion: v1
-kind: Template
-metadata:
-  name: custom-httpd
-objects:
-- apiVersion: apps/v1
-  kind: Deployment
-  metadata:
-    name: httpd-deployment
-  spec:
-    replicas: 2
-    selector:
-      matchLabels:
-        app: httpd
-    template:
-      metadata:
-        labels:
-          app: httpd
-      spec:
-        containers:
-        - name: httpd
-          image: httpd:latest
-          ports:
-          - containerPort: 80
-- apiVersion: v1
-  kind: Service
-  metadata:
-    name: httpd-service
-  spec:
-    selector:
-      app: httpd
-    ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+  
+![image](https://github.com/KrzakLara/uud/assets/116952456/ae561018-7099-465d-88d3-46faaaf5240d)
+
+
 
 
   3.2. Process and create resources from the template:
