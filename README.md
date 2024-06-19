@@ -175,7 +175,13 @@ There should be no image stream configured for this task. If you end up with ima
 13. 
 Why would you use Docker Swarm instead of OpenShift for a simple startup company not having a dedicated DevOps employee?
 
+L:
 | Task | Reason | Description | Command |
 |------|--------|-------------|---------|
-| Choose Docker Swarm | Simplicity and Lower Operational Overhead | Docker Swarm is inherently simpler to set up and manage compared to OpenShift. For a startup without a dedicated DevOps team, Docker Swarm provides a more straightforward approach to container orchestration. It integrates directly with Docker, which many developers are familiar with, reducing the learning curve and operational complexity. This makes it more suitable for small teams or startups looking to quickly deploy and manage containerized applications without the need for advanced configurations or the overhead that comes with more comprehensive solutions like OpenShift. | `docker swarm init` |
+| Choose Docker Swarm | Simplicity and Lower Operational Overhead | Docker Swarm is simpler to set up and manage compared to OpenShift. For a startup without a dedicated DevOps team, Docker Swarm provides a more straightforward approach to container orchestration. It integrates directly with Docker, which many developers are familiar with, reducing the learning curve and operational complexity. This makes it more suitable for small teams or startups looking to quickly deploy and manage containerized applications without the need for advanced configurations or the overhead that comes with more comprehensive solutions like OpenShift. | `docker swarm init` |
+
+N:
+| Task | Reason | Description | Command |
+|------|--------|-------------|---------|
+| Select Docker Swarm | Ease of Use and Minimal Operational Burden | Docker Swarm is easier to configure and administer compared to OpenShift. For a startup without a dedicated DevOps engineer, Docker Swarm offers a more straightforward method for container orchestration. It integrates seamlessly with Docker, which is widely known among developers, thus lowering the learning curve and reducing operational complexities. This makes it ideal for small teams or startups that need to deploy and manage containerized applications swiftly without dealing with the intricate setups and maintenance associated with more extensive solutions like OpenShift. | `docker swarm init` |
 
