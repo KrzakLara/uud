@@ -91,38 +91,69 @@ a) Development and testing on a developer laptop
 b) Production deployment with at least 10 instances and persistent storage
 Note that the company has multiple applications which it needs to deploy and also wants to automatically build new images for new versions of base images.
 
-
+L:
  | Scenario | Methodology | Command | Justification |
 |----------|-------------|---------|---------------|
 | Development and Testing on a Developer Laptop | Use Docker Compose with a Dockerfile for the Python app and `docker-compose.yml` for orchestrating the app and a PostgreSQL database. | `docker-compose up` | Docker Compose manages both the application and its database dependencies in isolated containers, simplifying development and testing. This setup can easily be mirrored on any developer's laptop, ensuring consistency across environments. PostgreSQL is chosen for its closer alignment with production-like settings compared to SQLite. |
 | Production Deployment with At Least 10 Instances and Persistent Storage | Deploy on Kubernetes using deployments for the app and StatefulSets for PostgreSQL. Use Helm for package management and Jenkins for CI/CD to handle deployments and updates. | `helm install my-python-app ./my-helm-chart` <br> `kubectl scale deployment/my-python-app --replicas=10` | Kubernetes provides robust tools for managing scalable applications and persistent storage. Helm simplifies the deployment of complex applications. Scaling up to 10 instances is managed via Kubernetes' declarative syntax, and Jenkins automates the build and deployment processes for new image versions, ensuring continuous integration and deployment. |
 
+N:
+
+| Scenario | Methodology | Command | Justification |
+|----------|-------------|---------|---------------|
+| Development and Testing on a Developer Laptop | Utilize Docker Compose with a Dockerfile for the Python application and a `docker-compose.yml` file to orchestrate the application and a PostgreSQL database. | `docker-compose up` | Docker Compose allows for seamless management of the application and its database dependencies within isolated containers, making development and testing straightforward. This setup ensures that all developers have a consistent environment on their laptops. PostgreSQL is preferred for its similarity to production environments over SQLite. |
+| Production Deployment with at Least 10 Instances and Persistent Storage | Use Kubernetes for deploying the application, with Deployments for the app and StatefulSets for PostgreSQL. Helm should be used for package management, and Jenkins for CI/CD to automate deployments and updates. | `helm install my-python-app ./my-helm-chart`<br>`kubectl scale deployment/my-python-app --replicas=10` | Kubernetes provides advanced features for managing scalable applications and persistent storage. Helm simplifies the deployment of complex applications. Scaling to 10 instances is efficiently handled using Kubernetes' declarative approach. Jenkins automates the build and deployment process for new image versions, supporting continuous integration and deployment. |
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
    
 *lo5:*
 
-9. 
+9. [LO5_M, 4.5 pts]
 Troubleshoot why the following command is wrong and why the container does not start successfully/terminates immediately. Explain your findings and correct the command. Note down both your findings and the command.
+podman run --name mysql -e MYSQL_USER=mike -e MYSQL_PASSWORD=mike -d mysql:5.7 (4.5 points)
     
 | Task | Issue Identified | Corrected Command | Explanation |
 |------|------------------|-------------------|-------------|
 | 9    | Missing root password specification and incorrect syntax for detach mode. | `podman run -d --name mysql -e MYSQL_USER=mike -e MYSQL_PASSWORD=mike -e MYSQL_ROOT_PASSWORD=notSoSecret mysql:5.7` | Added `MYSQL_ROOT_PASSWORD=notSoSecret` to satisfy MySQL's requirement for a root password. `-d` for detached mode is correctly used before specifying the image name. |
 
 
-10.
-What feature of container images enables you to deploy containers across multiple environments without having to care about accidentally changing the application code?
-    
+10. [LO5_M, 4.5 pts]
+What feature of container images enables you to deploy containers across multiple environments without having to care about accidentally changing the application code? (4.5 points)
+
+L:
 | Task | Feature | Description |
 |------|---------|-------------|
 | 10   | Consistency and Isolation | Container images ensure that the software runs the same way in any environment. This isolation between the application and its surroundings means developers don't have to worry about changes in the environment affecting the application's performance or functionalities. |
 
+N:
 
-11. 
-Troubleshoot why the following Dockerfile is not building. Explain your findings and correct the command. Note down both your findings and the corrected Dockerfile.
-    
+| Task | Feature | Description |
+|------|---------|-------------|
+| 10   | Consistency and Isolation | Container images ensure the application behaves the same across different environments. This isolation from the host system means that developers don't need to worry about environmental changes affecting the application, thereby preserving the integrity of the application code. |
+
+
+
+11. [LO5_D, 5 pts]
+Troubleshoot why the following Dockerfile is not building. Explain your findings and correct the command. Note down both your findings and the corrected Dockerfile. (2.5 points)
+FROM ubuntu
+LABEL VERSION=0.1
+LABEL BLOCK=true
+LABEL EMAIL=student@racunarstvo.hr
+RUN apt update && echo it works"
+WORKDIR /tmp/
+CMD ["sleep", "10"]
+
+
+L:
 | Task | Issue Identified | Corrected Dockerfile Line | Explanation |
 |------|------------------|--------------------------|-------------|
 | 11   | Syntax error and ineffective update command. | `RUN apt-get update && apt-get install -y some-package` | Corrected syntax by removing the unmatched quote and added an actual install command (`apt-get install -y some-package`) to make the update meaningful. The placeholder `some-package` should be replaced with actual package names as needed. |
+
+N:
+| Task | Problem Identified | Corrected Dockerfile Line | Explanation |
+|------|--------------------|--------------------------|-------------|
+| 11   | Syntax error and ineffective update command. | `RUN apt-get update && apt-get install -y some-package` | Fixed the syntax error by removing the unmatched quote and included an actual installation command (`apt-get install -y some-package`) to make the update command functional. Replace `some-package` with the actual package names needed. |
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
