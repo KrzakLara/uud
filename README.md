@@ -170,6 +170,71 @@ Deploy the httpd application on OpenShift. There should be 2 pods in the deploym
 Note that you will not be able to test your route without adding your FQDN to the list of URLs in /etc/hosts file. It is enough that it is created in OpenShift.
 There should be no image stream configured for this task. If you end up with image pull error, but you deployed everything as stated it is fine.
 
+Ovo napravi prije tablice:
+
+1. Step 1: Log in to OpenShift:
+oc login https://<your-openshift-cluster-api> --token=<your-token>
+
+2. Create a New Project:
+oc new-project httpd-project
+
+3. Deploy the HTTPD Application:
+   
+  3.1. Create a template file named custom-httpd.yaml:
+  apiVersion: v1
+kind: Template
+metadata:
+  name: custom-httpd
+objects:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: httpd-deployment
+  spec:
+    replicas: 2
+    selector:
+      matchLabels:
+        app: httpd
+    template:
+      metadata:
+        labels:
+          app: httpd
+      spec:
+        containers:
+        - name: httpd
+          image: httpd:latest
+          ports:
+          - containerPort: 80
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: httpd-service
+  spec:
+    selector:
+      app: httpd
+    ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+  3.2. Process and create resources from the template:
+  oc process -f custom-httpd.yaml | oc apply -f -
+  
+4. Step 4: Expose the Service:
+oc expose svc/httpd-service
+
+5. Step 5: Verify the Deployment
+oc get pods
+oc get svc
+oc get route
+
+6. Update /etc/hosts File:
+<your-route-url> <your-fqdn>
+example: httpd-project.apps.<your-openshift-cluster-domain> httpd.local
+
+
+
+
  | Task | Command | Description |
 |------|---------|-------------|
 | Deploy httpd application | `oc new-app --name=httpd --docker-image=httpd:2.4 --labels=app=httpd` | This command creates a new application in OpenShift using the httpd Docker image version 2.4. The application is named 'httpd' and appropriately labeled. |
