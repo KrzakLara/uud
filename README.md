@@ -227,3 +227,5 @@ N:
 |------|--------|-------------|---------|
 | Select Docker Swarm | Ease of Use and Minimal Operational Burden | Docker Swarm is easier to configure and administer compared to OpenShift. For a startup without a dedicated DevOps engineer, Docker Swarm offers a more straightforward method for container orchestration. It integrates seamlessly with Docker, which is widely known among developers, thus lowering the learning curve and reducing operational complexities. This makes it ideal for small teams or startups that need to deploy and manage containerized applications swiftly without dealing with the intricate setups and maintenance associated with more extensive solutions like OpenShift. | `docker swarm init` |
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
