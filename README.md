@@ -175,10 +175,10 @@ Ovo napravi prije tablice:
 1. Step 1: Log in to OpenShift:
 oc login https://<your-openshift-cluster-api> --token=<your-token>
 
-2. Create a New Project:
+2. Step 2: Create a New Project:
 oc new-project httpd-project
 
-3. Deploy the HTTPD Application:
+3. Step 3: Deploy the HTTPD Application:
    
   3.1. Create a template file named custom-httpd.yaml:
   
@@ -198,9 +198,10 @@ oc get pods
 oc get svc
 oc get route
 
-6. Update /etc/hosts File:
+6. Step 6: Update /etc/hosts File:
 <your-route-url> <your-fqdn>
 example: httpd-project.apps.<your-openshift-cluster-domain> httpd.local
+
 
 
 
